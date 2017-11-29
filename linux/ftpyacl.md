@@ -59,6 +59,7 @@ un servidor ftp puede trabajar como servidor ftp activo o pasivo.
 
 
 ## Instalacion de vsftp
+### manual vsftpd.conf
 * aptitude install vsftpd
 
 * el archivo de configuracion esta en /etc/vsftpd.config
@@ -75,3 +76,22 @@ un servidor ftp puede trabajar como servidor ftp activo o pasivo.
 * ftpd_banner="Bienvenido a tu servidor ftp"
 
 ## Cómo limitar el acceso a determinados usuarios
+> **Lista negra**
+
+>`userlist_enable=yes` -> tiene que estar a yes para que valide userlist_file y userlist_deny
+
+>`userlist_file=fichero` -> dentro de este fichero estan los usuarios a los que **no** se permite el acceso, los usuarios se ponen uno por linea
+
+>**Lista blanca**
+Necesita las directivas anteriores tambien
+
+>`userlist_deny=yes/no` -> por defecto esta a yes, si lo cambiamos a no, permite solo a los del fichero dentro de este fichero estan los usuarios a los que **si** se permite el acceso. **NOTA:** en este caso, no dejaría entrar tampoco a anonimo a no ser que lo añadamos al fichero
+
+## Enjaular a los usuarios (chroot)
+> se usan tres directivas, no puede ir hacia a tras en el arbol de directorios
+
+>`chroot_list_enable=yes` -> activamos chroot
+
+>`chroot_list_file=fichero` -> lista de usuarios que van a ser enjaulados
+
+> por seguridad un usuario enjaulado no debe poder escribir en la carpeta inicial a la que se conecta por ftp, si puede escribir no le dejara conectarse
