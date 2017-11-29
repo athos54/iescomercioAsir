@@ -95,3 +95,23 @@ Necesita las directivas anteriores tambien
 >`chroot_list_file=fichero` -> lista de usuarios que van a ser enjaulados
 
 > por seguridad un usuario enjaulado no debe poder escribir en la carpeta inicial a la que se conecta por ftp, si puede escribir no le dejara conectarse
+
+> En el manual, revisar la directiva chroot_list_file porque esta mas clara qeu esta chroot_local_user
+
+> chroot_local_user=yes/no --> por defecto esta **no**
+
+> * no -> de esta forma enjaula a los del fichero,
+> * si -> no enjaula a los del fichero
+
+## Como cambiar de directorio inicial
+
+> `local_root=directorio` -> manda a todos los usuarios locales **(menos el anonimo)** a ese directorio
+
+.
+
+> el usuario que usa para conectar como anonimo es el usuario ftp del servidor
+
+![](.png)
+
+
+> anon_root=ruta -> carpeta a donde redirige al conectarse como usaurio anonimo
