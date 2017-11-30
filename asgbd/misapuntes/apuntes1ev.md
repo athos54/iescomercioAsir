@@ -65,6 +65,22 @@ informacion de como se hace en el manual punto 6
 
 # Tipos de datos
 
+## numericos exactos
+
+![](numericos_exactos.png)
+
+## numericos aproximados
+
+![](numericos_aproximados.png)
+
+## fecha y hora
+
+![](fecha_y_hora.png)
+
+## cadenas
+
+![](cadenas.png) 
+
 # Procedimientos
 ```sql
 alter procedure numeroDePedidosYSumaDeCantidades
