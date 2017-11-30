@@ -15,7 +15,10 @@
     $cuadrado2 = new Cuadrado();
     $cuadrado3 = new Cuadrado();
 
-    print '<svg width="500px" height="500px" viewBox="0 0 500px 500px" version="1.1" xmlns="http://www.w3.org/2000/svg">';
+    $alturaLienzo=max($cuadrado1->tamanoCuadrado,$cuadrado2->tamanoCuadrado,$cuadrado3->tamanoCuadrado)+20;
+    $anchuraLienzo=$cuadrado1->tamanoCuadrado+$cuadrado2->tamanoCuadrado+$cuadrado3->tamanoCuadrado+20;
+
+    print '<svg style="background-color:grey" width="'.$anchuraLienzo.'px" height="'.$alturaLienzo.'px" viewBox="-10 -10 '.$anchuraLienzo.' '.$alturaLienzo.'" version="1.1" xmlns="http://www.w3.org/2000/svg">';
     print "<rect x='0px' width='".$cuadrado1->tamanoCuadrado."' height='".$cuadrado1->tamanoCuadrado."' style='fill:$cuadrado1->colorCuadrado' />";
     print "<rect x='".$cuadrado1->tamanoCuadrado."px' width='".$cuadrado2->tamanoCuadrado."' height='".$cuadrado2->tamanoCuadrado."' style='fill:$cuadrado2->colorCuadrado' />";
     print "<rect x='".($cuadrado1->tamanoCuadrado+$cuadrado2->tamanoCuadrado)."' width='".$cuadrado3->tamanoCuadrado."' height='".$cuadrado3->tamanoCuadrado."' style='fill:$cuadrado3->colorCuadrado' />";

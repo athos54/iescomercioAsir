@@ -32,10 +32,10 @@
     $colorCuadrado3="rgb($cuadrado3Rojo,$cuadrado3Verde,$cuadrado3Azul)";
     $posicionCuadrado3=$posicionCuadrado2+$tamanoCuadrado2;
 
-    $anchuraLienzo=$tamanoCuadrado1+$tamanoCuadrado2+$tamanoCuadrado3;
-    $alturaLienzo=max($tamanoCuadrado1,$tamanoCuadrado2,$tamanoCuadrado3);
+    $anchuraLienzo=$tamanoCuadrado1+$tamanoCuadrado2+$tamanoCuadrado3+20;
+    $alturaLienzo=max($tamanoCuadrado1,$tamanoCuadrado2,$tamanoCuadrado3)+20;
 
-    print '<svg width="'.$anchuraLienzo.'" height="'.$alturaLienzo.'" viewBox="0 0 '.$anchuraLienzo.'px '.$alturaLienzo.'px" version="1.1" xmlns="http://www.w3.org/2000/svg">';
+    print '<svg width="'.$anchuraLienzo.'" height="'.$alturaLienzo.'" style="background:grey" viewBox="-10 -10 '.$anchuraLienzo.' '.$alturaLienzo.'" version="1.1" xmlns="http://www.w3.org/2000/svg">';
     print "<rect x='".$posicionCuadrado1."px' width='".$tamanoCuadrado1."' height='".$tamanoCuadrado1."' style='fill:$colorCuadrado1' />";
     print "<rect x='".$posicionCuadrado2."px' width='".$tamanoCuadrado2."' height='".$tamanoCuadrado2."' style='fill:$colorCuadrado2' />";
     print "<rect x='".$posicionCuadrado3."px' width='".$tamanoCuadrado3."' height='".$tamanoCuadrado3."' style='fill:$colorCuadrado3' />";
