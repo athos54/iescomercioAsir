@@ -67,19 +67,19 @@ informacion de como se hace en el manual punto 6
 
 ## numericos exactos
 
-![](numericos_exactos.png)
+![](assets/numericos_exactos.png)
 
 ## numericos aproximados
 
-![](numericos_aproximados.png)
+![](assets/numericos_aproximados.png)
 
 ## fecha y hora
 
-![](fecha_y_hora.png)
+![](assets/fecha_y_hora.png)
 
 ## cadenas
 
-![](cadenas.png) 
+![](assets/cadenas.png)
 
 # Procedimientos
 ```sql
@@ -239,7 +239,7 @@ CREATE TABLE new_empleados
 
 # variables globales
 
-![](var_global.png)
+![](assets/var_global.png)
 
 # If
 ```sql
@@ -285,4 +285,4 @@ END CATCH
 # Errores
 
 
-![](errores.png)
+![](assets/errores.png)
