@@ -293,21 +293,22 @@ END CATCH
 ALTER TABLE - ADD Column
 
 To add a column in a table, use the following syntax:
+```sql
 ALTER TABLE table_name
 ADD column_name datatype;
 ALTER TABLE - DROP COLUMN
-
+```
 To delete a column in a table, use the following syntax (notice that some database systems don't allow deleting a column):
+
+```sql
 ALTER TABLE table_name
 DROP COLUMN column_name;
 ALTER TABLE - ALTER/MODIFY COLUMN
-
+```
 To change the data type of a column in a table, use the following syntax:
 
 SQL Server / MS Access:
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name datatype;
-
-My SQL / Oracle (prior version 10G):
-ALTER TABLE table_name
-MODIFY COLUMN column_name datatype; 
+```
