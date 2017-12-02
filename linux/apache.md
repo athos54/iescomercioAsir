@@ -58,4 +58,22 @@
 
 ## otras directivas
 
+### cambiar pagina de entrada
+
 `DirectoryIndex pagina1.html`
+
+### obligar a usar ssl
+`SSLrequireSSL`
+
+### autenticacion grupos
+authgroupfile
+
+### logs
+
+
+### htaccess
+
+
+### option indexes
+
+porque sino tambien podrias poner los modulos que hay que cargar, el de los grupos y el de ssl
