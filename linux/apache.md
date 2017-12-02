@@ -77,3 +77,9 @@ authgroupfile
 ### option indexes
 
 porque sino tambien podrias poner los modulos que hay que cargar, el de los grupos y el de ssl
+
+namevirtualhost
+
+servername
+
+en usuarios aparte de require valid-user no podias poner require user alumno1 por ejemplo?
