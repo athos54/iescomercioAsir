@@ -59,3 +59,11 @@ Estos son los diccionarios que me descargue.
 
 
 ![dictionary-list](assets/dictionary-list.png)
+
+El resultado en el archivo de salida es el siguiente
+
+```
+$6$uJu2EHOC$QGzuOzOglIUr6t7TbyrM6ColSFysCZexLZDZ.J10UyACN455zSVnn0BIQm44M8LjggYDUYsNXSaWIsmAAx1eG1:aprobado
+$6$TGpVkngA$Mz.W.BPSOJv1thFsS/vnYMi4pvNh.ePL0pH8EZ/JPmsNrKcejracp8dieTJ24HzW0h0EOIWErJOd06F0CDqle1:aprobado
+
+```
