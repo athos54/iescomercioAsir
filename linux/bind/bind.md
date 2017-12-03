@@ -1,4 +1,4 @@
-# bind
+# bind.
 
 ## Índice
 * Configuración básica.
