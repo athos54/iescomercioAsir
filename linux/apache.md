@@ -1,6 +1,10 @@
 
 # apache
 
+## documentacion
+
+[file:///usr/share/doc/apache2-doc/manual/es/index.html](file:///usr/share/doc/apache2-doc/manual/es/index.html)
+
 ## configuracion basica
 
 > no hay que cargar modulos
@@ -55,7 +59,7 @@
 
 ## autenticacion usuarios
 
-> no hay que cargar modulos (creo que viene cargado por defecto)
+> no hay que cargar modulos
 
 > si se quiere usar digest cargar modulo auth_digest.load  
 
@@ -75,6 +79,11 @@
 
 ```
 
+> en la directiva require se puede poner de varias formas
+
+* `require valid-user` -> permite el acceso a todos los usuarios que esten el el archivo de usuarios
+* `require user alumno1 alumno2` -> permite el acceso solo a los usuarios especificados
+
 ## autenticacion grupos
 
 > hay que cargar modulo authz_groupfile.load
@@ -83,7 +92,9 @@
 
 [file:///usr/share/doc/apache2-doc/manual/en/mod/mod_authz_groupfile.html#authgroupfile](file:///usr/share/doc/apache2-doc/manual/en/mod/mod_authz_groupfile.html#authgroupfile)
 
-`crear archivo de grupo y poner los grupos separados por espacios`
+> crear archivo de grupo y poner los grupos y los usuarios que pertenecen a cada grupo
+
+![](assets/markdown-img-paste-20171203124357942.png)
 
 ```
 <VirtualHost 192.168.1.100:80 192.168.1.100:443>
@@ -93,11 +104,23 @@
 		AuthName "Protected Area"
 		AuthUserFile /etc/apache2/seguridad/usuarios/usuarios
     AuthGroupFile /etc/apache2/seguridad/usuarios/group
-		Require group grupo
+		Require group profesores
 	</Directory>
 </VirtualHost>
 
 ```
+
+> resumen
+
+ 1. habilitar modulo `a2enmod authz_groupfile.load`
+ 1. crear archivo de grupo
+ 1. meter los grupos que quieres permitir separados por espacios
+authgroupfile
+
+#### ejemplo
+![](assets/markdown-img-paste-20171203123607702.png)
+
+
 
 ## otras directivas
 
@@ -115,14 +138,6 @@
 `SSLrequireSSL`
 
 
-### autenticacion grupos
-[file:///usr/share/doc/apache2-doc/manual/en/mod/mod_authz_groupfile.html](file:///usr/share/doc/apache2-doc/manual/en/mod/mod_authz_groupfile.html)
-
- 1. habilitar modulo `a2enmod authz_groupfile.load`
- 1. crear archivo de grupo
- 1. meter los grupos que quieres permitir separados por espacios
-authgroupfile
-
 
 ### htaccess
 [file:///usr/share/doc/apache2-doc/manual/es/mod/core.html#allowoverride](file:///usr/share/doc/apache2-doc/manual/es/mod/core.html#allowoverride)
@@ -135,6 +150,8 @@ authgroupfile
 [file:///usr/share/doc/apache2-doc/manual/es/mod/core.html#options](file:///usr/share/doc/apache2-doc/manual/es/mod/core.html#options)
 > esta directiva hay que ponerla dentro de directory
 
+#### NOTA: SI NO PONES LA DIRECTIVA DENTRO DE DIRECTORY, APACHE NO DA ERROR AL REINICIAR PERO NO FUNCIONA
+
 * options +indexes -> permite ver contenido de la carpeta
 * options -indexes -> **no** permite ver contenido de la carpeta
 
@@ -142,24 +159,37 @@ authgroupfile
 
 [file:///usr/share/doc/apache2-doc/manual/es/mod/core.html#namevirtualhost](file:///usr/share/doc/apache2-doc/manual/es/mod/core.html#namevirtualhost)
 
-* namevirtualhost
+Para servir dos paginas direfentes en la misma ip y mismo puerto hay dos directivas relacionadas.
 
+* `namevirtualhost` -> se pone al principio del fichero
 
+* `servername` -> se utiliza para diferenciar una pagina de otra, esta diferenciacion la hace por dominio.
 
-# de aqui para abajo falta por hacerlo
+![](assets/markdown-img-paste-20171203123949157.png)
 
-servername
+### habilitar sitio
 
-en usuarios aparte de require valid-user no podias poner require user alumno1 por ejemplo?
+`a2ensite nombreDelArchivoDelSitio.conf` -> NOTA: si el archivo no acaba en .conf puede dar problemas
 
-a2ensite a2dissite...
+### deshabilitar sitio
 
+`a2dissite nombreDelArchivoDelSitio.conf` -> NOTA: si el archivo no acaba en .conf puede dar problemas
 
-archivo ports
+### habilitar modulo
 
+`a2enmod nombreDelModulo`
 
+### deshabilitar modulo
 
+`a2dismod nombreDelModulo`
 
+### archivo ports
+
+`/etc/apache2/ports.conf`
+
+En este archivo podemos decirle por que puertos escucha apache
+
+![](assets/markdown-img-paste-20171203124928189.png)
 
 
 ### logs
