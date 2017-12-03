@@ -87,6 +87,8 @@
 `crear primer usuario: htpasswd -c archivo usuario`
 `crear resto usuarios: htpasswd archivo usuario`
 
+con la opcion -m se fuerza la encriptacion con md5
+
 ```
 <VirtualHost 192.168.1.100:80 192.168.1.100:443>
 	DocumentRoot /var/www/html/page1
