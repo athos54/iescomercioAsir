@@ -35,6 +35,8 @@ En el servidor dhcp podemos configurar las directivas de forma global o ir "loca
 
   con esta directiva especificamos las direcciones que vamos a repartir **esta directiva debe estar dentro de subnet**
 
+  esta directiva se puede poner varias veces dentro de subnet para especificar diferentes rangos
+
 * option routers 192.168.1.1
 
   puerta de enlace

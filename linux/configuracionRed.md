@@ -1,4 +1,4 @@
-Nota: para que el gestor de red del interface grafico no nos borre la configuracion tenemos que desinstalar el paquete `falta por rellenar`
+Nota: para que el gestor de red del interface grafico no nos borre la configuracion tenemos que desinstalar el paquete `network-manager`
 
 > archivo de configuracion /etc/network/interfaces
 
