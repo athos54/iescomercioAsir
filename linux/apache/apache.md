@@ -25,7 +25,7 @@
 
 
 
-## documentacion
+## documentación
 
 [file:///usr/share/doc/apache2-doc/manual/es/index.html](file:///usr/share/doc/apache2-doc/manual/es/index.html)
 
