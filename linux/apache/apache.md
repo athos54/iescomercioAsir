@@ -1,7 +1,7 @@
 
 # apache
 > indice
-* documentacion
+* documentación
 * configuracion basica
 * denegar acceso allow deny order
 * ssl https
