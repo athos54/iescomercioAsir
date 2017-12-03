@@ -22,7 +22,7 @@
 * logs
 * redireccion
 * comprobar sintaxis archivos configuracion
-
+* redireccion a un directorio local "alias"
 
 
 ## documentación
@@ -250,3 +250,9 @@ En el ejemplo anterior se redireccionará la raiz de nuestra web a google, es de
 ###  comprobar sintaxis archivos configuracion
 
 `apache2ctl configtest`
+
+### redireccion a un directorio local "alias"
+
+[https://httpd.apache.org/docs/2.4/mod/mod_alias.html#alias](https://httpd.apache.org/docs/2.4/mod/mod_alias.html#alias)
+
+`Alias "/" "/var/www/datos/index.html"`
