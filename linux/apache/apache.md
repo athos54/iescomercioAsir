@@ -21,6 +21,8 @@
 * archivo ports
 * logs
 * redireccion
+* comprobar sintaxis archivos configuracion
+
 
 
 ## documentacion
@@ -244,3 +246,7 @@ Redirect "/" "https://www.google.es"
 ```
 
 En el ejemplo anterior se redireccionará la raiz de nuestra web a google, es decir, `redirect "origen" "destino"`
+
+###  comprobar sintaxis archivos configuracion
+
+`apache2ctl configtest`
