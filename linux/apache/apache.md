@@ -20,6 +20,7 @@
 * deshabilitar modulo
 * archivo ports
 * logs
+* redireccion
 
 
 ## documentacion
@@ -230,3 +231,16 @@ Esta la vi en la documentacion
 `CustomLog /etc/apache2/seguridad/logs/acceso.txt common`
 
 **Nota: No olvidar poner common el el custom log**
+
+
+### redirección
+
+Documentación: [file:///usr/share/doc/apache2-doc/manual/en/mod/mod_alias.html#redirect](file:///usr/share/doc/apache2-doc/manual/en/mod/mod_alias.html#redirect)
+
+Añadiremos a Directory la directiva `Redirect`
+
+```
+Redirect "/" "https://www.google.es"
+```
+
+En el ejemplo anterior se redireccionará la raiz de nuestra web a google, es decir, `redirect "origen" "destino"`
