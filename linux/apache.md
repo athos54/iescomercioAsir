@@ -219,7 +219,13 @@ En este archivo podemos decirle por que puertos escucha apache
 
 los logs se subdividen en dos partes, logs de accesos y logs de error, se configuran de la siguiente manera:
 
+estas dos las dijo eduardo
+
 `ErrorLog /etc/apache2/seguridad/logs/error.txt`
+
+`TransferLog /etc/apache2/seguridad/logs/acceso.txt`
+
+Esta la vi en la documentacion
 
 `CustomLog /etc/apache2/seguridad/logs/acceso.txt common`
 
