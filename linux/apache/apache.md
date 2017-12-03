@@ -255,4 +255,6 @@ En el ejemplo anterior se redireccionará la raiz de nuestra web a google, es de
 
 [https://httpd.apache.org/docs/2.4/mod/mod_alias.html#alias](https://httpd.apache.org/docs/2.4/mod/mod_alias.html#alias)
 
+Dentro de VirtualHost y fuera de Directory
+
 `Alias "/" "/var/www/datos/index.html"`
