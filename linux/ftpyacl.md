@@ -111,7 +111,7 @@ Necesita las directivas anteriores tambien
 
 > el usuario que usa para conectar como anonimo es el usuario ftp del servidor
 
-![](.png)
+![](assets/ftp.png)
 
 
 > anon_root=ruta -> carpeta a donde redirige al conectarse como usaurio anonimo
