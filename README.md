@@ -4,3 +4,7 @@ Todos los archivos están en formato markdown (md), podeis convertirlos a pdf, p
 
 ## Como instalar gitkraken y descargar los ultimos cambios..
 https://youtu.be/WO5bY2eS7v8
+
+## Cómo enviar mis cambios o aportaciones para que lo vean todos
+
+https://youtu.be/7X3ClGSZT0g
