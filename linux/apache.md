@@ -1,5 +1,26 @@
 
 # apache
+> indice
+* documentacion
+* configuracion basica
+* denegar acceso allow deny order
+* ssl https
+* autenticacion usuarios
+* autenticacion grupos
+* ejemplo
+* otras directivas
+* cambiar pagina de entrada
+* obligar a usar ssl
+* htaccess
+* option indexes
+* servir dos paginas en MISMA IP Y MISMO PUERTO
+* habilitar sitio
+* deshabilitar sitio
+* habilitar modulo
+* deshabilitar modulo
+* archivo ports
+* logs
+
 
 ## documentacion
 
@@ -193,4 +214,11 @@ En este archivo podemos decirle por que puertos escucha apache
 
 
 ### logs
-los logs me parece que las directivas para decir donde los guardaba era errorlog y transferlog
+
+los logs se subdividen en dos partes, logs de accesos y logs de error, se configuran de la siguiente manera:
+
+`ErrorLog /etc/apache2/seguridad/logs/error.txt`
+
+`CustomLog /etc/apache2/seguridad/logs/acceso.txt common`
+
+**Nota: No olvidar poner common el el custom log**
