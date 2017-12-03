@@ -1,4 +1,4 @@
-# Crackear conraseñas con hashcat.
+# Crackear contraseñas con hashcat.
 
 Lo primero que vamos a hacer es descargarnos hashcat desde la pagina oficial. Debemos prestar especial atencion a los requisitos (los drivers de la tarjeta grafica), ya que una mala configuracion hará que el rendimiento sea muchisimo menor.
 
