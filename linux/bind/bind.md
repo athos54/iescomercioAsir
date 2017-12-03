@@ -1,4 +1,4 @@
-# isc-dhcp-server
+# bind
 
 ## Índice
 * Configuración básica.
