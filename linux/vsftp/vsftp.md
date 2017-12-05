@@ -9,6 +9,7 @@
   - [Cómo limitar el acceso a determinados usuarios](#cmo-limitar-el-acceso-a-determinados-usuarios)
   - [Enjaular a los usuarios (chroot)](#enjaular-a-los-usuarios-chroot)
   - [Como cambiar de directorio inicial](#como-cambiar-de-directorio-inicial)
+  - [Permisos de ficheros.](#permisos-de-ficheros)
 
 <!-- TOC END -->
 
@@ -129,3 +130,24 @@ Necesita las directivas anteriores tambien
 
 
 > anon_root=ruta -> carpeta a donde redirige al conectarse como usaurio anonimo
+
+## Permisos de ficheros.
+
+Hay que tener muy en cuenta los permisos locales.
+
+Los permisos que se usan son los del sistema local, o bien los permisos normales o bien acls
+
+Tenemos permisos de:
+* Descarga -> `download_enable` por defecto está a **si** lo que permite la descarga. Si está a no, no permite la descarga.
+
+* Subida -> `write_enable` por defecto está a **no** lo que no permite la subida de archivos. Si la ponemos a si, dejara subir archivos a los que tengan permisos para escribir en esa carpeta.
+
+* Para los usuarios anonimo podemos permitir que suban ficheros **(crear carpetas NO)** si habilitamos `anon_upload_enable` siempre y cuando **write_enable** esté habilitado.
+
+* Si queremos que anonimo pueda crear directorios deberemos poner la directiva `anon_mkdir_write_enable` -> la directiva write_enable debe estar a yes, siempre y cuando pueda escribir en directorio (recordemos que el usuario anonimo es el usuario **ftp**)
+
+><span style='font-size:35px'>
+  **NOTA: SI ENJAULAMOS EL SERVIDOR FTP Y DAMOS PERMISOS DE ESCRITURA EN LA CARPTA DE LA 'JAULA' NO NOS VA A DEJAR CONECTARNOS DE NINGUNA MANERA**
+</span>
+
+* `local_umask` -> sirve para cambiar la mascara, es decir, para fijar los permisos con los que se crean o se suben los ficheros de los usuarios locales. Si ponemos mascara 044 los permisos que se crearan son 733 **NOTA: aunque demos permisos de ejecución, LOS ARCHIVOS se crearan sin ejecucion** en el ejemplo anterior los permisos reales en ficheros serían 622
