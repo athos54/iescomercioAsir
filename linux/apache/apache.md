@@ -1,3 +1,29 @@
+<!-- TOC START min:1 max:3 link:true update:true -->
+- [apache](#apache)
+  - [documentación](#documentacin)
+  - [configuracion basica](#configuracion-basica)
+  - [denegar acceso allow deny order](#denegar-acceso-allow-deny-order)
+  - [ssl https](#ssl-https)
+  - [autenticacion usuarios](#autenticacion-usuarios)
+  - [autenticacion grupos](#autenticacion-grupos)
+  - [otras directivas](#otras-directivas)
+    - [cambiar pagina de entrada](#cambiar-pagina-de-entrada)
+    - [obligar a usar ssl](#obligar-a-usar-ssl)
+    - [htaccess](#htaccess)
+    - [option indexes](#option-indexes)
+    - [servir dos paginas en MISMA IP Y MISMO PUERTO](#servir-dos-paginas-en-misma-ip-y-mismo-puerto)
+    - [habilitar sitio](#habilitar-sitio)
+    - [deshabilitar sitio](#deshabilitar-sitio)
+    - [habilitar modulo](#habilitar-modulo)
+    - [deshabilitar modulo](#deshabilitar-modulo)
+    - [archivo ports](#archivo-ports)
+    - [logs](#logs)
+    - [redirección](#redireccin)
+    - [comprobar sintaxis archivos configuracion](#comprobar-sintaxis-archivos-configuracion)
+    - [redireccion a un directorio local "alias"](#redireccion-a-un-directorio-local-alias)
+
+<!-- TOC END -->
+
 
 # apache
 > indice

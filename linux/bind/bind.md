@@ -1,3 +1,15 @@
+<!-- TOC START min:1 max:3 link:true update:true -->
+- [bind.](#bind)
+  - [Índice](#ndice)
+  - [Ficheros principales:](#ficheros-principales)
+  - [Configuración básica.](#configuracin-bsica)
+  - [Desactivar cache bind](#desactivar-cache-bind)
+  - [Forwarders](#forwarders)
+  - [Permitir consultas dns sólo desde determinadas redes](#permitir-consultas-dns-slo-desde-determinadas-redes)
+  - [Comandos de detección de errores:](#comandos-de-deteccin-de-errores)
+
+<!-- TOC END -->
+
 # bind.
 
 ## Índice

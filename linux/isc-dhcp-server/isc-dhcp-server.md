@@ -1,3 +1,11 @@
+<!-- TOC START min:1 max:3 link:true update:true -->
+- [Servidor dhcp isc-dhcp-server](#servidor-dhcp-isc-dhcp-server)
+  - [Listado de directivas mas importantes](#listado-de-directivas-mas-importantes)
+  - [Ejemplo completo](#ejemplo-completo)
+  - [Otros](#otros)
+
+<!-- TOC END -->
+
 # Servidor dhcp isc-dhcp-server
 
 archivos de configuracion:

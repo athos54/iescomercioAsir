@@ -1,3 +1,10 @@
+<!-- TOC START min:1 max:3 link:true update:true -->
+- [routing linux](#routing-linux)
+  - [1. permitir routing entre interfaces de red](#1-permitir-routing-entre-interfaces-de-red)
+  - [2. permitir salir a internet desde otras redes](#2-permitir-salir-a-internet-desde-otras-redes)
+
+<!-- TOC END -->
+
 # routing linux
 
 ## 1. permitir routing entre interfaces de red

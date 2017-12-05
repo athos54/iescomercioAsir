@@ -1,3 +1,17 @@
+<!-- TOC START min:1 max:3 link:true update:true -->
+- [5.1 acl](#51-acl)
+  - [setfacl](#setfacl)
+  - [getfacl](#getfacl)
+  - [mascara](#mascara)
+- [5.2 Configuracion de un servidor ftp en linux](#52-configuracion-de-un-servidor-ftp-en-linux)
+  - [Instalacion de vsftp](#instalacion-de-vsftp)
+    - [manual vsftpd.conf](#manual-vsftpdconf)
+  - [Cómo limitar el acceso a determinados usuarios](#cmo-limitar-el-acceso-a-determinados-usuarios)
+  - [Enjaular a los usuarios (chroot)](#enjaular-a-los-usuarios-chroot)
+  - [Como cambiar de directorio inicial](#como-cambiar-de-directorio-inicial)
+
+<!-- TOC END -->
+
 # 5.1 acl
 ## setfacl
 añadir modificar acls
