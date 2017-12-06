@@ -1,10 +1,14 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Practica voluntaria Ejercicios de tema 3: Seguridad lógica](#practica-voluntaria-ejercicios-de-tema-3-seguridad-lgica)
+- [Práctica voluntaria Ejercicios de tema 3: Seguridad lógica](#practica-voluntaria-ejercicios-de-tema-3-seguridad-lgica)
 - [Añadido: crackeando con hashcat](#aadido-crackeando-con-hashcat)
 
 <!-- /TOC -->
-# Practica voluntaria Ejercicios de tema 3: Seguridad lógica
+# Práctica voluntaria Ejercicios de tema 3: Seguridad lógica
+
+En esta práctica vamos a desencriptar las contraseñas de una máquina linux. Para ello lo vamos a hacer con la herramienta john the ripper (de aquí en adelante 'john').
+
+Vamos a ver la diferencia entre usar el john que te descargas directamente desde los repositorios con respecto a descargarnoslo de la página oficial y compilarlo cambiando alguna cosa.
 
 Metemos los hashes en un archivo
 ![hash-to-file](hash-to-file.png)
@@ -13,11 +17,11 @@ ejecutamos el comando `john pass.practica.charo.voluntaria`
 
   ![running-john](running-john.png)
 
-Si pulsamos cualquier tecla menos la q o ctrl+c veremos el estado por el que va el crackeo
+Si pulsamos cualquier tecla menos la `q` o `ctrl+c` veremos el estado por el que va el crackeo
 
 ![waiting](waiting.png)
 
-Como vemos que va a tardar mucho, vamos a descargar un diccionario y probaremos con el, aunque como podemos ver, nos ha sacado una de las dos contraseñas
+Como vemos que va a tardar mucho, vamos a descargar un diccionario y probaremos con él, aunque como podemos ver, nos ha sacado una de las dos contraseñas
 
 ![pass-found](pass-found.png)
 
@@ -36,7 +40,7 @@ Y ejecutaremos john de la siguiente forma
 
 ![john-with-dictionary](john-with-dictionary.png)
 
-Como vemos en la imagen anterior, john nos guarda la contraseña que saco anteriormente, si quisieramos verla tendriamos que usar el parametro `--show`
+Como vemos en la imagen anterior, john nos guarda la contraseña que sacó anteriormente, si quisieramos verla tendriamos que usar el parametro `--show`
 
 No hemos tenido suerte, no la ha sacado, tendriamos que probar con otros diccionarios o de forma incremental.
 
@@ -55,26 +59,26 @@ Si lo quisieramos hacer con hashcat, sería de la siguiente manera:
 
 ![hashcat-test](hashcat-test.png)
 
-Esto nos guardara la contraseña en ela rchivo `testresult.txt`. Lo ejecutamos:
+Esto nos guardara la contraseña en el archivo `testresult.txt`. Lo ejecutamos:
 
-En la siguiente imagen, nos podemos fijar, en que guest-queue es el 'paso' por el que va. Como hemos puesto que la longitud maxima sea 4 caracteres (`?1?1?1?1` -> cada ?1 representa un caracter con charset ?l?d (es decir, letras mayusculas y minusculas)) está ya haciendo el calculo de 3 caracteres, y vemos que ha sacado 1 de las dos contraseñas como podemos apreciar en Recovered. Si vamos al archivo que pusimos de output (`testresult.txt`) veremos que tenemos la contraseña.
+En la siguiente imagen, nos podemos fijar, en que `guest-queue` es el 'paso' por el que va. Como hemos puesto que la longitud máxima sea 4 caracteres (`?1?1?1?1` -> cada ?1 representa un caracter con charset ?l?d (es decir, letras mayusculas y minusculas)) está ya haciendo el cálculo de 3 caracteres, y vemos que ha sacado 1 de las dos contraseñas como podemos apreciar en `Recovered`. Si vamos al archivo que pusimos de output (`testresult.txt`) veremos que tenemos la contraseña.
 ![hashcat-scanning](hashcat-scanning.png)
 
 Archivo `testresult.txt`:
 
-![testresult-txt](testresult-txt.png) 
+![testresult-txt](testresult-txt.png)
 
 
 
 # Añadido: crackeando con hashcat
 
-Lo primero que vamos a hacer es descargarnos hashcat desde la pagina oficial. Debemos prestar especial atencion a los requisitos (los drivers de la tarjeta grafica), ya que una mala configuracion hará que el rendimiento sea muchisimo menor.
+Lo primero que vamos a hacer es descargarnos hashcat desde la página oficial. Debemos prestar especial atención a los requisitos (los drivers de la tarjeta gráfica), ya que una mala configuracion hará que el rendimiento sea muchísimo menor.
 
 [Descargar hashcat](https://hashcat.net/hashcat/)
 
 ![download-hashcat](assets/download-hashcat.png)
 
-Ya podriamos usar hashcat, pero vamos a descargarnos hashcat-gui para no tener que ejecutar los comandos desde consola.
+Ya podríamos usar hashcat, pero vamos a descargarnos hashcat-gui para no tener que ejecutar los comandos desde consola.
 
 [Descargar hashcat-gui](https://hashkiller.co.uk/hashcat-gui.aspx)
 
