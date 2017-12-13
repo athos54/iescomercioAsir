@@ -79,7 +79,7 @@ un servidor ftp puede trabajar como servidor ftp activo o pasivo.
 ### manual vsftpd.conf
 * aptitude install vsftpd
 
-* el archivo de configuracion esta en /etc/vsftpd.config
+* el archivo de configuracion esta en /etc/vsftpd.conf
 * listen=yes -> esto quiere decir que no va en inet.d sino que va por su lado
 
 > siempre directiva=opcion **sin espacios**
