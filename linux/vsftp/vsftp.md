@@ -10,6 +10,8 @@
   - [Enjaular a los usuarios (chroot)](#enjaular-a-los-usuarios-chroot)
   - [Como cambiar de directorio inicial](#como-cambiar-de-directorio-inicial)
   - [Permisos de ficheros.](#permisos-de-ficheros)
+  - [Comandos adicionales](#comandos-adicionales)
+  - [ftp por ssl](#ftp-por-ssl)
 
 <!-- TOC END -->
 
@@ -144,10 +146,36 @@ Tenemos permisos de:
 
 * Para los usuarios anonimo podemos permitir que suban ficheros **(crear carpetas NO)** si habilitamos `anon_upload_enable` siempre y cuando **write_enable** esté habilitado.
 
-* Si queremos que anonimo pueda crear directorios deberemos poner la directiva `anon_mkdir_write_enable` -> la directiva write_enable debe estar a yes, siempre y cuando pueda escribir en directorio (recordemos que el usuario anonimo es el usuario **ftp**)
+* Si queremos que anonimo pueda crear directorios deberemos poner la directiva `anon_mkdir_write_enable` -> la directiva write_enable debe estar a yes, siempre y cuando pueda escribir en directorio (recordemos que el usuario anónimo es el usuario **ftp**)
 
 ><span style='font-size:35px'>
   **NOTA: SI ENJAULAMOS EL SERVIDOR FTP Y DAMOS PERMISOS DE ESCRITURA EN LA CARPTA DE LA 'JAULA' NO NOS VA A DEJAR CONECTARNOS DE NINGUNA MANERA**
 </span>
 
-* `local_umask` -> sirve para cambiar la mascara, es decir, para fijar los permisos con los que se crean o se suben los ficheros de los usuarios locales. Si ponemos mascara 044 los permisos que se crearan son 733 **NOTA: aunque demos permisos de ejecución, LOS ARCHIVOS se crearan sin ejecucion** en el ejemplo anterior los permisos reales en ficheros serían 622
+* `local_umask` -> sirve para cambiar la mascara, es decir, para fijar los permisos con los que se crean o se suben los ficheros de los usuarios locales. Si ponemos mascara 044 los permisos que se crearan son 733 **NOTA: aunque demos permisos de ejecución, LOS ARCHIVOS se crearan sin ejecución** en el ejemplo anterior los permisos reales en ficheros serían 622
+
+* `anon_umask` ->  igual que `local_umask` pero para usuario anonimo
+
+## Comandos adicionales
+
+* `liste_address` = ip -> dirección ip del servidor por la que se escuchará peticiones ftp. Sólo se puede poner una ip
+
+* `max_clientes` -> número de clientes que pueden conectarse simultaneamente.
+
+* `local_max_rate` = x -> indica los bytes/segundo permitidos por usuario.
+
+* `anon_max_rate` -> lo mismo que `local_max_rate` pero para usuario anónimo
+
+* `xferlog_enable` -> por defecto esta a **no** si se pone a yes, activa los logs en `/var/log/vsftpd.log`
+
+## ftp por ssl
+
+* lo primero es crear los certificados con `openssl req -x509 -nodes -newkey rsa:1024 -days 365 -keyout=clave.pem -out=cert.pem`
+
+* ssl_enable por defecto está a **no**
+
+> como hemos usado el algoritmo rsa, tendremos que utilizar las siguientes directivas:
+
+* rsa_cert_file=ruta
+
+* rsa_private_cert_file=ruta
