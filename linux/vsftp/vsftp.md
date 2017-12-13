@@ -88,7 +88,7 @@ un servidor ftp puede trabajar como servidor ftp activo o pasivo.
 
 * local_enable=yes -> se trabaja con usuarios locales de linux aunque podria usarse usuarios de un servidor ldap o radius
 
-* anonimous_enable=yes
+* anonymous_enable=yes
 
 * ftpd_banner="Bienvenido a tu servidor ftp"
 
@@ -158,9 +158,9 @@ Tenemos permisos de:
 
 ## Comandos adicionales
 
-* `liste_address` = ip -> dirección ip del servidor por la que se escuchará peticiones ftp. Sólo se puede poner una ip
+* `listen_address` = ip -> dirección ip del servidor por la que se escuchará peticiones ftp. Sólo se puede poner una ip
 
-* `max_clientes` -> número de clientes que pueden conectarse simultaneamente.
+* `max_clients` -> número de clientes que pueden conectarse simultaneamente.
 
 * `local_max_rate` = x -> indica los bytes/segundo permitidos por usuario.
 
@@ -178,4 +178,4 @@ Tenemos permisos de:
 
 * rsa_cert_file=ruta
 
-* rsa_private_cert_file=ruta
+* rsa_private_key_file=ruta
