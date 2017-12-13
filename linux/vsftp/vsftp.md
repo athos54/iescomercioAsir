@@ -170,7 +170,7 @@ Tenemos permisos de:
 
 ## ftp por ssl
 
-* lo primero es crear los certificados con `openssl req -x509 -nodes -newkey rsa:1024 -days 365 -keyout=clave.pem -out=cert.pem`
+* lo primero es crear los certificados con `openssl req -x509 -nodes -newkey rsa:1024 -days 365 -keyout clave.pem -out cert.pem`
 
 * ssl_enable por defecto está a **no**
 
