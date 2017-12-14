@@ -12,6 +12,7 @@
   - [Permisos de ficheros.](#permisos-de-ficheros)
   - [Comandos adicionales](#comandos-adicionales)
   - [ftp por ssl](#ftp-por-ssl)
+  - [ftp explicito e implicito](#ftp-explicito-e-implicito)
 
 <!-- TOC END -->
 
@@ -176,6 +177,32 @@ Tenemos permisos de:
 
 > como hemos usado el algoritmo rsa, tendremos que utilizar las siguientes directivas:
 
-* rsa_cert_file=ruta
+* `rsa_cert_file=ruta`
 
-* rsa_private_key_file=ruta
+* `rsa_private_key_file=ruta`
+
+* `force_local_data_ssl=yes/no` -> por defecto estan a **si** -> fuerza los datos por ssl
+
+* `force_local_login_ssl=yes/no`-> por defecto estan a **si** -> fuerza el login por ssl
+
+* `allow_anon_ssl=yes/no` -> por defecto está a no (lo que no permite acceso por ssl a usuario anonimos)
+
+* `force_anon_ssl=yes/no` -> fuerza que el login del usuario anonimo vaya por ssl
+
+* `force_anon_data_ssl=yes/no` -> fuerza que los datos del usuario anonimo vaya por ssl
+
+`force_anon_ssl` y `force_anon_data_ssl` **no** dependen del valor de la directiva `allow_anon_ssl`
+
+## ftp explicito e implicito
+
+El explicito *suele* ir por el puerto 21 y el implicito *suele* ir por el puerto 990.
+
+**Por defecto es explicito**
+
+`implicit_ssl` -> si está esta directiva solo se puede conectar de forma implícita, si no está esta directiva solo se podría conectar de forma explícita.
+
+Explícito, se establece la conexión y luego se intercambian los certificados
+
+Implícito (mas seguro) no se establece la comunicación hasta que no se intercambia el certificado
+
+`listen_port=puerto` -> puerto por el que escucha el servidor
