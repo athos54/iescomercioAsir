@@ -19,9 +19,9 @@
 
     if($jugador1[1]==$jugador1[2] && $jugador2[1]==$jugador2[2]){
        if($jugador1[0]>$jugador2[0]){
-         print "<p>Jugador1 gana CON DOBLE EMPATE</p>";
+         print "<p>Jugador1 gana CON DOBLE PAREJA</p>";
        }elseif($jugador1[0]<$jugador2[0]){
-         print "<p>Jugador2 gana CON DOBLE EMPATE</p>";
+         print "<p>Jugador2 gana CON DOBLE PAREJA</p>";
        }else{
          print "Empatan";
        }
