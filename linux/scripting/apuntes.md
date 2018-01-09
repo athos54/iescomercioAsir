@@ -26,4 +26,110 @@ con el comando export podemos crear nuestras propias variables de entorno
 vectores -> array
 
 ficheros1 = `ls`
+
 ficheros1 = (`ls`) -> guarda el resultado en un array
+
+expr opera matematicamente
+
+## if
+
+para comparar se haria algo asi...
+
+if **[** **]**
+
+o
+
+if test y algo que no se como...
+
+```bash
+#!/bin/bash
+read -p "Introduzca un numero: " numero
+
+if [ $numero -ge 0 ]
+then
+	echo -e "\nEl numero es mayor que cero"
+elif [ loquesea ]
+then
+	#your code
+else
+
+	echo -e "\nEl numero es menor que cero"
+fi
+
+```
+
+## case
+
+ ```bash
+#!/bin/bash
+read -p "Introduce un numero: " numero
+
+case $numero in
+	1)
+		echo "el numero es uno";
+		;;
+	2)
+		echo "el numero es dos";
+		;;
+	3)
+		....
+	*)
+		#esto es el else;
+		;;
+esac
+
+ ```
+
+ ejercicio de prueba
+
+ ```bash
+#!/bin/bash
+
+# Enunciado
+#
+# Al ejecutarlo lo primero que haga es pedir la ruta completa a un archivo
+# y una vez escrito el archivo que aparezca el siguiente menu:
+#
+# 1 borrar el archivo
+# 2 mover archivo
+# 3 copiar archivo
+# Selecciona una opcion:
+
+# Si selecciona la opcion 2 o 3 pedira ruta destino y ejecutara la accion
+# No controlar errores
+
+clear
+
+read -p "Introduzca la ruta completa a un archivo: " archivo
+
+
+if [ -d $archivo ]
+then
+	echo "Es un directorio"
+else
+	if [ -e $archivo ]
+	then
+		echo "1 Borrar archivo"
+		echo "2 Mover archivo"
+		echo "3 Copiar archivo"
+		read -n1 -p "Selecciona una opcion: " numero
+
+		case $numero in
+			1)
+			`rm $archivo`
+			;;
+			2)
+			read -p "Introduce destino: " destino
+			`mv $archivo $destino`
+			;;
+			3)
+			read -p "Introduce destino:" destino
+			`cp $archivo $destino`
+			;;
+		esac
+	else
+		echo "El archivo no existe"
+	fi
+fi
+
+ ```
