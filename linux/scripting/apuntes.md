@@ -133,3 +133,18 @@ else
 fi
 
  ```
+
+ $? indica si la ultima instruccion se ha ejecutado bien o no, 0 indica que la ejecucion esta ok,
+
+ entrada estandar 0>
+
+ salida estandar 1>
+
+ errores 2>
+
+ redireccionar salida estandar y errores a un archivo 2>&1>archivo
+
+ ejercicio 2
+
+
+ script que al ejecutar pida el nombre de una tarjeta de red, comprueba si existe la tarjeta, si no existe lo indica y acaba, y si existe me pide ip y mascara y la configura
