@@ -1,0 +1,3 @@
+Sistema de alta disponibilidad para aplicación web.
+
+Estudio, creación y configuración de un sistema de alta disponibilidad para una aplicación web. Se trata de hacer un sistema que permita que la aplicación esté en línea el 100% (ese sería el objetivo) del tiempo, sin pérdida de datos en caso de que alguno de los servidores falle. Esto incluye todo lo necesario, como pueda ser balanceo de carga de servidor web, copias de respaldo y restauración automáticas, balanceo de carga o replicación de bases de datos etc...
