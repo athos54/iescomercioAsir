@@ -202,3 +202,46 @@ esac
  ```
 
  `sed 's/^ *//g)'` quita todos los espacios del principio `^ *`
+
+
+
+
+ ejercicio6
+
+ ````bash
+#!/bin/bash
+
+# ejercicio 6: Script llamado usuarios.sh que le pasemos como parametro el nombre de un usuario y los grupos a los que pertenecera dicho usuario. Y hara lo siguiente:
+# - Si el usuario ya existe lo indicara y finaliza.
+# - Si alguno de los grupos no existe lo crea y lo indica por pantalla.
+# - Preguntara el numero de usuarios a crear y creara tantos usuarios como se haya indicado añadiendole al final del nombre un numero a cada uno. Ej: Si
+# el usuario era pepito creara pepito1, pepito2, pepito3...perteneciendo todos ellos a los grupos indicados.
+# -Asignara como contraseña a cada usuario su mismo nombre
+
+existsUser=`cat /etc/passwd |grep -w $1:|wc -l`
+
+if [ "$existsUser" = "1" ]; then
+  echo "El usuario existe"
+  exit
+else
+  usuario=$1
+  shift
+  read -p "Cuantos usuarios quieres crear" numberOfUsers
+  for n in `seq 1 $numberOfUsers`
+  do
+    useradd $usuario$n -p"$usuario$n" -m -s /bin/bash
+
+    for grupo in $*
+    do
+      existGroup=`cat /etc/group |grep $grupo: |wc -l`
+      if [ "$existGroup" = "0" ]; then
+        echo "Creando grupo $1"
+        addgroup $1
+      fi
+      echo "Añadiendo al usuario $usuario$n en el grupo $grupo"
+      addgroup $usuario$n $grupo
+    done
+  done
+fi
+
+ ```
