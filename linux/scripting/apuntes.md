@@ -148,3 +148,57 @@ fi
 
 
  script que al ejecutar pida el nombre de una tarjeta de red, comprueba si existe la tarjeta, si no existe lo indica y acaba, y si existe me pide ip y mascara y la configura
+
+ ejercicio 3
+
+ ```bash
+#!/bin/bash
+
+#programa que al ejecutarlo muestre por pantalla lo siguiente:
+
+#las ips del equipo son ....
+#la puerta de enlace del equipo es ...
+#los dns del equipo son ...
+
+echo "1.- Mostrar ips"
+echo "2.- Mostrar gw"
+echo "3.- Mostrar Dns"
+
+read -p "Elige una opción" numero
+
+case $numero in
+  1)
+    numberOfIps=`ip address |grep -w inet |  sed 's|    inet||g' | cut -f 1 -d/ | wc -l`
+    if [ "$numberOfIps" = "0" ]
+    then
+      echo "No hay ips marcial!!!!"
+    else
+      ip address |grep -w inet |  sed 's|    inet||g' | cut -f 1 -d/ | wc -l
+    fi
+    read -p "Presiona una tecla para volver" volver
+  ;;
+  2)
+    numberOfGw=`route -n | grep UG |cut -f10 -d" " | wc -l`
+    if [ "$numberOfGw" = "0" ]
+    then
+      echo "No hay gw marcial!!!!"
+    else
+      route -n | grep UG |cut -f10 -d" "
+    fi
+    read -p "Presiona una tecla para volver" volver
+  ;;
+  3)
+    numberOfDns=`cat /etc/resolv.conf |grep nameserver|sed 's/nameserver //g'`
+    if [ "$numberOfDns" = "0" ]
+    then
+      echo "No hay dns marcial!!!!"
+    else
+      cat /etc/resolv.conf |grep nameserver|sed 's/nameserver //g'
+    fi
+    read -p "Presiona una tecla para volver" volver
+  ;;
+esac
+
+ ```
+
+ `sed 's/^ *//g)'` quita todos los espacios del principio `^ *`
