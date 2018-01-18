@@ -148,3 +148,100 @@ fi
 
 
  script que al ejecutar pida el nombre de una tarjeta de red, comprueba si existe la tarjeta, si no existe lo indica y acaba, y si existe me pide ip y mascara y la configura
+
+ ejercicio 3
+
+ ```bash
+#!/bin/bash
+
+#programa que al ejecutarlo muestre por pantalla lo siguiente:
+
+#las ips del equipo son ....
+#la puerta de enlace del equipo es ...
+#los dns del equipo son ...
+
+echo "1.- Mostrar ips"
+echo "2.- Mostrar gw"
+echo "3.- Mostrar Dns"
+
+read -p "Elige una opción" numero
+
+case $numero in
+  1)
+    numberOfIps=`ip address |grep -w inet |  sed 's|    inet||g' | cut -f 1 -d/ | wc -l`
+    if [ "$numberOfIps" = "0" ]
+    then
+      echo "No hay ips marcial!!!!"
+    else
+      ip address |grep -w inet |  sed 's|    inet||g' | cut -f 1 -d/ | wc -l
+    fi
+    read -p "Presiona una tecla para volver" volver
+  ;;
+  2)
+    numberOfGw=`route -n | grep UG |cut -f10 -d" " | wc -l`
+    if [ "$numberOfGw" = "0" ]
+    then
+      echo "No hay gw marcial!!!!"
+    else
+      route -n | grep UG |cut -f10 -d" "
+    fi
+    read -p "Presiona una tecla para volver" volver
+  ;;
+  3)
+    numberOfDns=`cat /etc/resolv.conf |grep nameserver|sed 's/nameserver //g'`
+    if [ "$numberOfDns" = "0" ]
+    then
+      echo "No hay dns marcial!!!!"
+    else
+      cat /etc/resolv.conf |grep nameserver|sed 's/nameserver //g'
+    fi
+    read -p "Presiona una tecla para volver" volver
+  ;;
+esac
+
+ ```
+
+ `sed 's/^ *//g)'` quita todos los espacios del principio `^ *`
+
+
+
+
+ ejercicio6
+
+ ````bash
+#!/bin/bash
+
+# ejercicio 6: Script llamado usuarios.sh que le pasemos como parametro el nombre de un usuario y los grupos a los que pertenecera dicho usuario. Y hara lo siguiente:
+# - Si el usuario ya existe lo indicara y finaliza.
+# - Si alguno de los grupos no existe lo crea y lo indica por pantalla.
+# - Preguntara el numero de usuarios a crear y creara tantos usuarios como se haya indicado añadiendole al final del nombre un numero a cada uno. Ej: Si
+# el usuario era pepito creara pepito1, pepito2, pepito3...perteneciendo todos ellos a los grupos indicados.
+# -Asignara como contraseña a cada usuario su mismo nombre
+
+existsUser=`cat /etc/passwd |grep -w $1:|wc -l`
+
+if [ "$existsUser" = "1" ]; then
+  echo "El usuario existe"
+  exit
+else
+  usuario=$1
+  shift
+  read -p "Cuantos usuarios quieres crear" numberOfUsers
+  for n in `seq 1 $numberOfUsers`
+  do
+    useradd $usuario$n -p"$usuario$n" -m -s /bin/bash
+
+    for grupo in $*
+    do
+      existGroup=`cat /etc/group |grep $grupo: |wc -l`
+      if [ "$existGroup" = "0" ]; then
+        echo "Creando grupo $1"
+        addgroup $1
+      fi
+      echo "Añadiendo al usuario $usuario$n en el grupo $grupo"
+      addgroup $usuario$n $grupo
+    done
+  done
+fi
+
+ ```
