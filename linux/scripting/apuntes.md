@@ -226,19 +226,19 @@ if [ "$existsUser" = "1" ]; then
 else
   usuario=$1
   shift
-  read -p "Cuantos usuarios quieres crear" numberOfUsers
+  read -p "Cuantos usuarios quieres crear: " numberOfUsers
   for n in `seq 1 $numberOfUsers`
   do
     useradd $usuario$n -p"$usuario$n" -m -s /bin/bash
-
+    echo -e "$usuario$n\n$usuario$n" | passwd $usuario$n
     for grupo in $*
     do
       existGroup=`cat /etc/group |grep $grupo: |wc -l`
       if [ "$existGroup" = "0" ]; then
-        echo "Creando grupo $1"
-        addgroup $1
+        echo -e "\e[0;31mCreando grupo $grupo\e[0;37m"
+        addgroup $grupo
       fi
-      echo "Añadiendo al usuario $usuario$n en el grupo $grupo"
+      echo -e "\e[0;34mAñadiendo al usuario $usuario$n en el grupo $grupoe[0;37m"
       addgroup $usuario$n $grupo
     done
   done
