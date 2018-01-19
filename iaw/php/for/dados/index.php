@@ -10,7 +10,6 @@ function imprimirDado(&$totalSuma,&$valorMasAlto,&$numeroDeVecesQueSalioElMaximo
   }
   $totalSuma=$totalSuma+$numero;
   return ('<td><div class="spiralContainer"><div class="spiral"><img src="'.$numero.'.svg"/></div></div></td>');
-
 }
 
 
