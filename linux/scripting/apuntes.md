@@ -245,3 +245,70 @@ else
 fi
 
  ```
+
+ ```bash
+
+#leer un fichero linea a linea
+
+fichero=$1
+numeroDeLineas=`cat $fichero | wc -l`
+echo "hay $numeroDeLineas lineas"
+
+contador=0
+
+for linea in `seq 1 $numeroDeLineas`
+do
+    let lineasAMostrar=$numeroDeLineas-$contador
+    tail $fichero -n $lineasAMostrar | head -n 1
+    echo ""
+    let contador=$contador+1
+done
+
+ ```
+
+ ```bash
+#!/bin/bash
+
+#al ejecutarlo pregutne la direccion dns
+#comprueba si ese dns existe en el fichero correspondiente
+#si no esta añadirlo
+#y si esta debe indicarlo y pregunta si queremos mantenerlo o eliminarlo
+
+read -p "Introduce el dns: " dns
+
+primero=`echo $dns| cut -f1 -d"."`
+segundo=`echo $dns| cut -f2 -d"."`
+tercero=`echo $dns| cut -f3 -d"."`
+cuarto=`echo $dns| cut -f4 -d"."`
+echo $primero
+echo $segundo
+echo $tercero
+echo $cuarto
+if [ $primero -gt 255 ] || [ $segundo -gt 255 ] || [ $tercero -gt 255 ] || [ $cuarto -gt 255 ] || [ $primero -lt 0 ] || [ $segundo -lt 0 ] || [ $tercero -lt 0 || $cuarto -lt 0 ];then
+  echo "Dns no valido"
+  exit
+fi
+
+
+existe=`cat /etc/resolv.conf | grep $dns | wc -l`
+
+if [ $existe -gt 0 ]
+then
+  read -p "El dns ya existe, quieres manternerlo o eliminarlo? M/E " accion
+  if [ $accion = 'M' ]
+  then
+    echo "Vale, lo mantenemos"
+    exit
+  elif [ $accion = 'E' ]
+  then
+    echo 'eliminando dns'
+    sed -i".bak" '/'$dns'/d' /etc/resolv.conf
+  else
+    echo "Accion invalida"
+  fi
+else
+  echo 'Añadiendo dns'
+  echo "nameserver $dns" >> /etc/resolv.conf
+fi
+
+ ```
