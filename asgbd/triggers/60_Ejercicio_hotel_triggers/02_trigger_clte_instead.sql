@@ -1,21 +1,12 @@
-create TRIGGER tr_cliente3 ON dbo.clientes INSTEAD OF INSERT, UPDATE 
+ALTER  TRIGGER tr_cliente2 ON dbo.clientes INSTEAD OF update 
 AS  BEGIN
-if (SELECT count(*) FROM inserted i, paises p 
-       WHERE i.pais=p.pais)=0    
-BEGIN  
-	INSERT INTO paises 
-	SELECT pais
-	FROM INSERTED
-END 
-if (SELECT count(*) FROM deleted i)=0
--- Es Un INSERT 
-BEGIN  
-INSERT INTO clientes 
-select * 
-FROM INSERTED
-end
-else
-begin
+	if not exists(SELECT * FROM inserted i, paises p 
+       WHERE i.pais=p.pais)    
+	BEGIN  
+		INSERT INTO paises 
+		SELECT pais
+		FROM INSERTED
+	END  
 UPDATE [hotel].[dbo].[clientes]
    SET   [Identificacion] = i.Identificacion
       ,Pais = I.Pais
@@ -24,17 +15,19 @@ UPDATE [hotel].[dbo].[clientes]
       ,[Apellido2] = I.[Apellido2]
       ,[Direccion] = I.[Direccion]
       ,[Telefono] = I.[Telefono]
-      ,[Observaciones] =I.[Observaciones] 
-   
+      ,[Observaciones] =I.[Observaciones]      
    FROM
     [hotel].[dbo].[clientes]  as cli  
      INNER JOIN
     inserted as i
     ON
     cli.Identificacion = i.Identificacion
-END  
-
-END
+ END
 
 GO
-
+UPDATE [hotel].[dbo].[clientes]
+   SET  Pais = 'oTRO2'
+   WHERE Identificacion ='12345       '
+   go
+select * from clientes  
+GO

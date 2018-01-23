@@ -1,4 +1,4 @@
-create TRIGGER tr_cliente3 ON dbo.clientes INSTEAD OF INSERT, UPDATE 
+ALTER TRIGGER tr_cliente3 ON dbo.clientes INSTEAD OF INSERT, UPDATE 
 AS  BEGIN
 if (SELECT count(*) FROM inserted i, paises p 
        WHERE i.pais=p.pais)=0    
