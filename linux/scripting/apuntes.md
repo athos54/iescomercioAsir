@@ -312,3 +312,66 @@ else
 fi
 
  ```
+
+```bash
+#!/bin/bash
+# Script que muestre el siguiente menú:
+# 1.- Mostrar la tabla de enrutamiento.
+# 2.- Añadir ruta estática.
+# 3.- Eliminar ruta estática.
+# 4.- Salir
+# Carcaterísticas:
+#  La primera opción mostrará en pantalla la tabla de enrutamiento del equipo, hasta que el usuario pulse intro, en cuyo caso volverá al menú.
+#  La segunda opción solicitará la ruta a añadir: IP, máscara y tarjeta de salida y añadirá dicha ruta a la tabla de enrutamiento, para volver posteriormente al menú. Si la tarjeta de red no existe lo indicará y volverá al menú cuando el usuario pulse intro.
+#  La tercera opción permitirá eliminar una ruta, solicitando: IP, máscara y tarjeta. Eliminado dicha ruta y volviendo de nuevo al menú.
+#  Debe mostrarse el menú hasta que se seleccione la opción 4 de salir.
+
+while [ "$tecla" != "4" ]; do
+  clear
+  echo "1.- Mostrar la tabla de enrutamiento."
+  echo "2.- Añadir ruta estática."
+  echo "3.- Eliminar ruta estática."
+  echo "4.- Salir"
+  echo ""
+  read -p "Introduce una opcion: " tecla
+
+  if [ $tecla -eq 1 ];then
+    route -n
+    read -n1 -p "Presiona una tecla para continuar..."
+  elif [ $tecla -eq 2 ];then
+    read -p "Introduce direccion de red: " red
+    read -p "Introduce mascara: " mascara
+    read -p "Introduce interface de salida: " interface
+    echo ""
+    echo "Añadiendo ruta estatica..."
+    route add -net $red netmask $mascara dev $interface
+    read -n1 -p "Presiona una tecla para continuar..."
+  elif [ $tecla -eq 3 ];then
+    read -p "Introduce direccion de red: " red
+    read -p "Introduce mascara: " mascara
+    read -p "Introduce interface de salida: " interface
+    echo ""
+    echo "Eliminando ruta estatica..."
+
+    route del -net $red netmask $mascara dev $interface
+    read -n1 -p "Presiona una tecla para continuar..."
+  elif [ $tecla == 4 ];then
+    echo "Saliendo..."
+  else
+    echo "Opcion invalida"
+    read -n1 -p "Presiona una tecla para continuar..."
+  fi
+
+done
+
+```
+
+
+```bash
+#!/bin/bash
+
+#programa que al ejecutarlo muestre las tarjeta de red del equipo y nos pregunte
+#la tarjeta a configurar una vez seleccionada una, preguntara la ip y mascara la configurara
+#en el fichero oportuno. Tener en cuenta que dicha tarjeta puede estar ya configurada.
+
+```
