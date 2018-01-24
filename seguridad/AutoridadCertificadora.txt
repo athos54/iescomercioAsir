@@ -1,0 +1,67 @@
+Crear servidor.
+- Instalar autoriadad certificadiora. servicio de rol de certificados de active Directory
+	- seleccionar entidad de certifiacion e inscripcion web de entidad de certificacion.
+	- escojer autoridad raiz.
+	- Crear una nueva clave privada.
+	- Elegir servidor de encriptado microsoft, 2048 y SHA1.
+	- nombre de equipo com autoridad certificadora.
+	- Instalar.
+
+Desde cliente
+- Accedemos desde un navegador en un cliente. http://ipservidor/certsrv o https://ipservidor/certsrv
+- Solicitamos un certificado 
+	- Para firmar correo electronico.
+	- Completar formulario.
+	- Opciones de clave.  Microsoft, 1024 y Marcar claves como exportables.
+	- Opciones avanzadas para marcar exportar claves privadas.(PKCS o P12)
+	- Enviar.
+
+Desde servidor.
+- Accedemos a entidad de emisora de certificados.
+	- Solicitudes pendientes.
+	- Selccionas la opcion con boton derecho, todas las tareas y emitir.
+	- El certificado pasa a la carpeta de emitidos.
+
+Desde el cliente.
+- Volvemos a la pagina ipservidor/certsrv
+- Nos aparecera instalar certificado.
+- Lo tendremos instalado en el navegado.
+- Vamos a las opciones y lo exportamos junto con la clave privada.
+	- Incluir a la hora de exportar las dependencias de la unidad certificadora.
+	- Mientras exportamos incluir la clave privada.
+	- Elegir PKCS. Opicones 1 y 3.
+- Tambien tenemos que exportar el certificado de la autoridad certificadora en la pestaña de entidades de certificación.
+
+Desde cliente.
+- Vamos a la aplicacion de correo (Thunderbird).
+- Configuramos una cuenta de corre.
+- Importamos el certificado personal.
+	- Opiones avanzadas.
+	- Certificados.
+	- Ver certificados.
+	- Importamos el certificado personal y comprobamos que se instala tambien en autoridades el de la autoridad certifiacadora y sino se importa manualmente.
+	- En las caracteristicas del certificado de autoridad, hay que marcar que es una autoridad certificadora que puede identificar a los usuarios de correo. (Puede que se haga de forma atuomatica al ingresar el certificado personal)
+		- Editar confianza. 
+		- marcar la casilla: Este certificado puede identificar a los usuarios de correo.
+- Configuración de cuenta.
+	- Pestaña seguridad.
+	- Seleccionamos el certificado para firmar los mensajes que envie.
+- Enviar un correo.
+	- Opcion de firmar correo.
+	- El remitente les aparece con un sobre lacrado.
+- (Opcional cifrar un correo y enviar.)
+
+Desde cliente receptor.
+- Se tiene que tener instalado el certificado de la autoridad certificadora para validar el correo.
+- Se pulsa sobre el sobre lacrado y se abre una ventan donde se ve si se valida el correo.
+
+
+En caso de no poder acceder por https
+- Vamos a IIS.
+- Certificados del servidor.
+- Crear certificado autofirmado o solicitamos un certifiado.
+- Vas al servicio SRV, todas las tareas y envias solicitud nueva eligiendo la creada.
+- Vas a solicitudes pendientes y lo emites.
+- Copias archivo y lo sacas al escritorio.
+- Volvemos a certificados del servidor IIS y elegimos completar solicitud de certificado.
+- Despues vamos al enlace de de sitio web por defecto y agregamos un enlace para el puerto 443 y le incluimos el certificado.
