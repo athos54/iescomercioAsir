@@ -18,6 +18,7 @@
 
     }
     #first{
+      border-radius: 50%;
       background: green;
       display: inline-block;
       transform: rotate('0deg');
@@ -38,9 +39,9 @@
       if(anterior){
         let a = anterior.substr(7,anterior.indexOf('deg'))
         console.log('a',a);
-        total=parseInt(a)+10
+        total=parseInt(a)+1
       }else{
-        total=10;
+        total=1;
       }
       first.style.transform = 'rotate('+total+'deg)'
     }
