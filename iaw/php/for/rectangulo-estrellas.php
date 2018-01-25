@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title></title>
     <style>
+    body{
+      font-family: courier
+    }
       .rectangulo-estrellas{
         background: blue;
         display: inline-block;
@@ -14,8 +17,16 @@
         position: fixed;
         left:50vw;
         top:40vh;
+        transform: translate(-50%,-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
       }
-
+      .numeros{
+        /* position: relative; */
+        position: absolute;
+      }
     </style>
 
   </head>
@@ -31,29 +42,32 @@
 // * * * * * *
 
 
-$ancho = 6;
-$alto = 4;
+$ancho = rand(4,26);
+$alto = rand(4,26);
 ?>
-<div class="rectangulo-estrellas">
-<?php
-for($i=1;$i<=$alto;$i++){
-  if($i==1 || $i==$alto){
-    // primera linea y ultima linea
-    for($k=1;$k<=$ancho;$k++){
-      print "* ";
+<!-- <pre> -->
+  <div class="rectangulo-estrellas">
+    <div class="numeros"><?=$ancho?><br><?=$alto?></div>
+  <?php
+  for($i=1;$i<=$alto;$i++){
+    if($i==1 || $i==$alto){
+      // primera linea y ultima linea
+      for($k=1;$k<=$ancho;$k++){
+        echo "* ";
+      }
+      echo "<br/>";
+    }else{
+      // resto
+      print('* ');
+      for($j=2;$j<$ancho;$j++){
+        echo('&nbsp&nbsp');
+      }
+      print('*<br/>');
     }
-    echo "<br/>";
-  }else{
-    // resto
-    print('* ');
-    for($j=1;$j<=$ancho;$j++){
-      echo('&nbsp&nbsp');
-    }
-    print('* <br/>');
   }
-}
-?>
-</div>
+  ?>
+  </div>
+<!-- </pre> -->
 <?php
   $contador=0;
   $numero=200;
