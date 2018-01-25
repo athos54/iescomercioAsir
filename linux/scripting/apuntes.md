@@ -368,10 +368,37 @@ done
 
 
 ```bash
-#!/bin/bash
+#!/bin/bash -x
 
 #programa que al ejecutarlo muestre las tarjeta de red del equipo y nos pregunte
 #la tarjeta a configurar una vez seleccionada una, preguntara la ip y mascara la configurara
 #en el fichero oportuno. Tener en cuenta que dicha tarjeta puede estar ya configurada.
+
+tarjetas=(`ip address |grep -n mtu|cut -d":" -f3`)
+
+echo "Que tarjeta quieres configurar?"
+
+# echo ${tarjetas[*]}
+let numeroDeElementos=${#tarjetas[*]}-1
+# echo $numeroDeElementos
+for numero in `seq 0 $numeroDeElementos`
+do
+  echo $numero: ${tarjetas[$numero]}
+done
+read -p "Introduce la tarjeta que quieres" tarjetaElegida
+
+estaConfigurada=`cat /etc/network/interfaces |grep $tarjetaElegida |wc -l`
+
+if [ $estaConfigurada -lt 0 ]; then
+  echo "No existe, vamos a configurarla"
+else
+  lineaInicio=`cat /etc/network/interfaces |grep -n $tarjetaElegida |cut -d":" -f1`
+  totalLineas=`cat /etc/network/interfaces |wc -l`
+  let lineasAMostrarDesdeElFinal=$totalLineas-${lineaInicio[0]}+1
+  lineasDeLasTarjetas=(`cat /etc/network/interfaces |tail -n 20 | grep -n auto | cut -d":" -f1`)
+  let siguienteTarjeta=${lineasDeLasTarjetas[0]}
+  cat /etc/network/interfaces | tail -n $lineasAMostrarDesdeElFinal | head -n $siguienteTarjeta
+
+fi
 
 ```
