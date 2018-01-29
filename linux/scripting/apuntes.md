@@ -368,7 +368,7 @@ done
 
 
 ```bash
-#!/bin/bash -x
+#!/bin/bash
 
 #programa que al ejecutarlo muestre las tarjeta de red del equipo y nos pregunte
 #la tarjeta a configurar una vez seleccionada una, preguntara la ip y mascara la configurara
@@ -378,27 +378,38 @@ tarjetas=(`ip address |grep -n mtu|cut -d":" -f3`)
 
 echo "Que tarjeta quieres configurar?"
 
-# echo ${tarjetas[*]}
 let numeroDeElementos=${#tarjetas[*]}-1
-# echo $numeroDeElementos
 for numero in `seq 0 $numeroDeElementos`
 do
   echo $numero: ${tarjetas[$numero]}
 done
-read -p "Introduce la tarjeta que quieres" tarjetaElegida
+read -p "Introduce la tarjeta que quieres: " tarjetaElegida
 
 estaConfigurada=`cat /etc/network/interfaces |grep $tarjetaElegida |wc -l`
 
 if [ $estaConfigurada -lt 0 ]; then
   echo "No existe, vamos a configurarla"
 else
-  lineaInicio=`cat /etc/network/interfaces |grep -n $tarjetaElegida |cut -d":" -f1`
+  lineaInicioDeLaTarjetaElegida=(`cat /etc/network/interfaces |grep -n -w $tarjetaElegida |cut -d":" -f1`)
   totalLineas=`cat /etc/network/interfaces |wc -l`
-  let lineasAMostrarDesdeElFinal=$totalLineas-${lineaInicio[0]}+1
-  lineasDeLasTarjetas=(`cat /etc/network/interfaces |tail -n 20 | grep -n auto | cut -d":" -f1`)
-  let siguienteTarjeta=${lineasDeLasTarjetas[0]}
-  cat /etc/network/interfaces | tail -n $lineasAMostrarDesdeElFinal | head -n $siguienteTarjeta
+  let lineasAMostrarDesdeElFinal=$totalLineas-${lineaInicioDeLaTarjetaElegida[0]}+1
+  lineasDeLasTarjetasPosterioresEnElArchivo=(`cat /etc/network/interfaces |tail -n $lineasAMostrarDesdeElFinal | grep -n auto |cut -d":" -f1`)
+  let ultimaLineaDeLaTarjetaElegida=${lineasDeLasTarjetasPosterioresEnElArchivo[1]}-1
+  let ultimaLineaABorrar=$lineaInicioDeLaTarjetaElegida+$ultimaLineaDeLaTarjetaElegida-1
+  echo ultimaLineaABorrar
+  if [ ! $ultimaLineaABorrar ];then
+    sed -i "$lineaInicioDeLaTarjetaElegida,$ultimaLineaABorrar d" /etc/network/interfaces
+  fi
+  sed -i "$lineaInicioDeLaTarjetaElegida,$ d" /etc/network/interfaces
 
+	read -p "Introduce la ip: " ip
+  read -p "Introduce la mascara: " mascara
+
+  echo "" >>/etc/network/interfaces
+  echo "auto $tarjetaElegida" >>/etc/network/interfaces
+  echo "iface $tarjetaElegida inet static" >>/etc/network/interfaces
+  echo "        address $ip" >>/etc/network/interfaces
+  echo "        netmask $mascara" >>/etc/network/interfaces
 fi
 
 ```
