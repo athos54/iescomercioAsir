@@ -413,3 +413,185 @@ else
 fi
 
 ```
+
+```bash
+#!/bin/bash
+
+# Script llamado ftp.sh que permita configurar el servidor vsftp con las siguientes opciones de menú. Únicamente debe salir al pulsar la opción 5. Al realizar cualquiera de las opciones volverá al menú anterior.
+# 1. Arrancar servidor ftp.
+# 2. Parar servidor ftp
+# 3. Reiniciar servidorftp.
+# 4. Configurar servidor ftp:
+  # a. Usuario anónimo:
+    # i. Habilitar acceso anónimo.
+    # ii. Deshabilitrar acceso anónimo.
+    # iii. Volver al menú anterior.
+  # b. Usuarios locales:
+    # i. Permitir acceso a usuarios locales.
+    # ii. No permitir el acceso a usuarios locales.
+    # iii. Añadir usuario a permitir.
+    # iv. Eliminar acceso a usuario.
+    # v. Volver al menú anterior.
+  # c. Enjaular:
+    # i. Enjaular usuarios
+    # ii. Desenjaular usuarios
+    # iii. Volver al menú anterior
+  # d. Volver al menú anterior.
+# 5. Salir
+
+while [ "$opcion" != "5" ]; do
+  clear
+  echo "1. Arrancar servidor ftp"
+  echo "2. Parar servidor ftp"
+  echo "3. Reiniciar servidorftp"
+  echo "4. Configurar servidor ftp"
+  echo "5. Salir"
+  echo ""
+
+  read -p "Introduce una opcion: " opcion
+  echo ""
+  case "$opcion" in
+    "1")
+      echo "Arrancando servidor ftp..."
+      /etc/init.d/vsftpd start
+      read -p "Pulsa una tecla para continuar" tecla
+    ;;
+    "2")
+      echo "Parando servidor ftp..."
+      /etc/init.d/vsftpd stop
+      read -p "Pulsa una tecla para continuar" tecla
+
+    ;;
+    "3")
+      echo "Reiniciando servidor ftp..."
+      /etc/init.d/vsftpd restart
+      read -p "Pulsa una tecla para continuar" tecla
+
+    ;;
+    "4")
+      clear
+      while [ "$menu2" != "d" ];do
+        clear
+        echo ""
+        echo "a. Usuario anónimo: "
+        echo "b. Usuarios locales: "
+        echo "c. Enjaular: "
+        echo "d. Volver al menu anterior: "
+        read -p "Introduce una opcion menu2" menu2
+        archivo="/etc/vsftpd.conf"
+        case "$menu2" in
+          "a")
+            while [ "$menu3" != "iii" ];do
+              clear
+              echo $menu2
+              echo ""
+              echo "Menu a. Usuario anónimo:"
+              echo ""
+              echo "i. Habilitar acceso anónimo."
+              echo "ii. Deshabilitrar acceso anónimo."
+              echo "iii. Volver al menú anterior."
+              read -p "Introduce opcion menu3: " menu3
+              if [ "$menu3" == "i" ];then
+                sed -i '/anonymous_enable/d' $archivo>/dev/null
+                echo "anonymous_enable=yes">>$archivo
+              elif [ "$menu3" == "ii" ];then
+                sed -i '/anonymous_enable/d' $archivo>/dev/null
+                echo "anonymous_enable=no">>$archivo
+              else
+                echo "Saliendo al menu anterior"
+                menu3="limpiarvariable"
+                break;
+              fi
+            done
+          ;;
+          "b")
+            while [ "$menu4" != "v" ];do
+              clear
+              echo ""
+              echo "Menu b. Usuarios locales: "
+              echo ""
+              echo "i. Permitir acceso a usuarios locales."
+              echo "ii. No permitir el acceso a usuarios locales."
+              echo "iii. Añadir usuario a permitir."
+              echo "iv. Eliminar acceso a usuario."
+              echo "v. Volver al menú anterior."
+
+              read -p "Introduce opcion menu4: " menu4
+              if [ "$menu4" == "i" ];then
+                sed -i '/local_enable/d' $archivo>/dev/null
+                sed -i '/userlist_enable/d' $archivo>/dev/null
+                sed -i '/userlist_deny/d' $archivo>/dev/null
+                echo "local_enable=yes">>$archivo
+              elif [ "$menu4" == "ii" ];then
+                sed -i '/local_enable/d' $archivo>/dev/null
+                echo "local_enable=no">>$archivo
+              elif [ "$menu4" == "iii" ];then
+                sed -i '/local_enable/d' $archivo>/dev/null
+                sed -i '/userlist_enable/d' $archivo>/dev/null
+                sed -i '/userlist_deny/d' $archivo>/dev/null
+                echo "local_enable=yes" >> $archivo
+                echo "userlist_file=/etc/vsftpd.users" >> $archivo
+                echo "userlist_enable=yes" >> $archivo
+                echo "userlist_deny=no" >> $archivo
+                read -p "Introduce usuario a permitir" usuario
+                echo $usuario >> /etc/vsftpd.users
+              elif [ "$menu4" == "iv" ];then
+                read -p "Introduce usuario a denegar" usuario
+                sed -i "/$usuario/d" /etc/vsftpd.users>/dev/null
+              else
+                echo "Saliendo al menu anterior"
+                menu4='limpiarvariable'
+                break
+              fi
+            done
+          ;;
+          "c")
+            # menu5='algo'
+            while [ "$menu5" != "iii"];do
+              clear
+              echo $menu2
+              echo "a"
+              read -p "Introduce una opcion menu5: " menu5
+            #
+            #   echo "Menu c. Enjaular:"
+            #   echo ""
+            #   echo "i. Enjaular usuarios"
+            #   echo "ii. Desenjaular usuarios"
+            #   echo "iii. Volver al menú anterior"
+            #   echo ""
+            #   read -p "Introduce una opcion: " menu5
+            #
+            #
+            #   if [ "$menu5" == "i" ];then
+            #     sed -i "/chroot_list_enable/d" $archivo
+            #     sed -i "/chroot_list_file/d" $archivo
+            #     echo "chroot_list_enable=yes" >> $archivo
+            #     echo "chroot_list_file=/etc/vsftpd.users" >> $archivo
+            #     read -p "Introduce usuario: " usuario
+            #     echo $usuario >> /etc/vsftpd.users
+            #
+            #   elif [ "$menu5" == "ii" ];then
+            #     read -p "Introduce usuario: " usuario
+            #     sed -i "/$usuario/d" /etc/vsftpd.users
+            #   else
+            #     menu5="limpiarvariable"
+            #     break
+            #   fi
+            done
+          ;;
+          "d")
+            echo ""
+            echo "Saliendo al menu anterior:"
+            echo ""
+          ;;
+        esac
+      done
+      menu2='limpiarvariable'
+    ;;
+    "5")
+        echo "Saliendo..."
+        exit
+    ;;
+  esac
+done
+```
