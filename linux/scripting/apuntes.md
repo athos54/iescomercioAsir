@@ -593,3 +593,13 @@ while [ "$opcion" != "5" ]; do
 done
 
 ```
+
+```bash
+# Programa llamado permisos.sh que se le pase como parámetro el nombre de un fichero o directorio. Y al ejecutarlo debe indicar los permisos para todos los usuarios y grupos de ese fichero o directorio. Los permisos deben cambiar en caso de ser fichero o directorio, es decir un directorio se puede “entrar”, no “ejecutar”.
+# Ejemplo: ./permisos.sh fichero1
+# Los permisos de fichero1 son:
+# Usuario pepito: leer y escribir
+# Usuario Juanito: leer
+# Grupo alumnos: ejecutar y leer
+# El resto de usuarios y grupos no pueden hacer nada.
+```
