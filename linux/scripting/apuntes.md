@@ -547,36 +547,33 @@ while [ "$opcion" != "5" ]; do
           ;;
           "c")
             # menu5='algo'
-            while [ "$menu5" != "iii"];do
+            while [ "$menu5" != "iii" ];do
               clear
               echo $menu2
-              echo "a"
-              read -p "Introduce una opcion menu5: " menu5
-            #
-            #   echo "Menu c. Enjaular:"
-            #   echo ""
-            #   echo "i. Enjaular usuarios"
-            #   echo "ii. Desenjaular usuarios"
-            #   echo "iii. Volver al menú anterior"
-            #   echo ""
-            #   read -p "Introduce una opcion: " menu5
-            #
-            #
-            #   if [ "$menu5" == "i" ];then
-            #     sed -i "/chroot_list_enable/d" $archivo
-            #     sed -i "/chroot_list_file/d" $archivo
-            #     echo "chroot_list_enable=yes" >> $archivo
-            #     echo "chroot_list_file=/etc/vsftpd.users" >> $archivo
-            #     read -p "Introduce usuario: " usuario
-            #     echo $usuario >> /etc/vsftpd.users
-            #
-            #   elif [ "$menu5" == "ii" ];then
-            #     read -p "Introduce usuario: " usuario
-            #     sed -i "/$usuario/d" /etc/vsftpd.users
-            #   else
-            #     menu5="limpiarvariable"
-            #     break
-            #   fi
+              echo "Menu c. Enjaular:"
+              echo ""
+              echo "i. Enjaular usuarios"
+              echo "ii. Desenjaular usuarios"
+              echo "iii. Volver al menú anterior"
+              echo ""
+              read -p "Introduce una opcion: " menu5
+
+
+              if [ "$menu5" == "i" ];then
+                sed -i "/chroot_list_enable/d" $archivo
+                sed -i "/chroot_list_file/d" $archivo
+                echo "chroot_list_enable=yes" >> $archivo
+                echo "chroot_list_file=/etc/vsftpd.users" >> $archivo
+                read -p "Introduce usuario: " usuario
+                echo $usuario >> /etc/vsftpd.users
+
+              elif [ "$menu5" == "ii" ];then
+                read -p "Introduce usuario: " usuario
+                sed -i "/$usuario/d" /etc/vsftpd.users
+              else
+                menu5="limpiarvariable"
+                break
+              fi
             done
           ;;
           "d")
@@ -594,4 +591,5 @@ while [ "$opcion" != "5" ]; do
     ;;
   esac
 done
+
 ```
