@@ -547,36 +547,33 @@ while [ "$opcion" != "5" ]; do
           ;;
           "c")
             # menu5='algo'
-            while [ "$menu5" != "iii"];do
+            while [ "$menu5" != "iii" ];do
               clear
               echo $menu2
-              echo "a"
-              read -p "Introduce una opcion menu5: " menu5
-            #
-            #   echo "Menu c. Enjaular:"
-            #   echo ""
-            #   echo "i. Enjaular usuarios"
-            #   echo "ii. Desenjaular usuarios"
-            #   echo "iii. Volver al menú anterior"
-            #   echo ""
-            #   read -p "Introduce una opcion: " menu5
-            #
-            #
-            #   if [ "$menu5" == "i" ];then
-            #     sed -i "/chroot_list_enable/d" $archivo
-            #     sed -i "/chroot_list_file/d" $archivo
-            #     echo "chroot_list_enable=yes" >> $archivo
-            #     echo "chroot_list_file=/etc/vsftpd.users" >> $archivo
-            #     read -p "Introduce usuario: " usuario
-            #     echo $usuario >> /etc/vsftpd.users
-            #
-            #   elif [ "$menu5" == "ii" ];then
-            #     read -p "Introduce usuario: " usuario
-            #     sed -i "/$usuario/d" /etc/vsftpd.users
-            #   else
-            #     menu5="limpiarvariable"
-            #     break
-            #   fi
+              echo "Menu c. Enjaular:"
+              echo ""
+              echo "i. Enjaular usuarios"
+              echo "ii. Desenjaular usuarios"
+              echo "iii. Volver al menú anterior"
+              echo ""
+              read -p "Introduce una opcion: " menu5
+
+
+              if [ "$menu5" == "i" ];then
+                sed -i "/chroot_list_enable/d" $archivo
+                sed -i "/chroot_list_file/d" $archivo
+                echo "chroot_list_enable=yes" >> $archivo
+                echo "chroot_list_file=/etc/vsftpd.users" >> $archivo
+                read -p "Introduce usuario: " usuario
+                echo $usuario >> /etc/vsftpd.users
+
+              elif [ "$menu5" == "ii" ];then
+                read -p "Introduce usuario: " usuario
+                sed -i "/$usuario/d" /etc/vsftpd.users
+              else
+                menu5="limpiarvariable"
+                break
+              fi
             done
           ;;
           "d")
@@ -594,4 +591,98 @@ while [ "$opcion" != "5" ]; do
     ;;
   esac
 done
+
+```
+
+```bash
+#!/bin/bash
+
+# Programa llamado permisos.sh que se le pase como parámetro el nombre de un fichero o directorio. Y al ejecutarlo debe indicar los permisos para todos los usuarios y grupos de ese fichero o directorio. Los permisos deben cambiar en caso de ser fichero o directorio, es decir un directorio se puede “entrar”, no “ejecutar”.
+# Ejemplo: ./permisos.sh fichero1
+# Los permisos de fichero1 son:
+# Usuario pepito: leer y escribir
+# Usuario Juanito: leer
+# Grupo alumnos: ejecutar y leer
+# El resto de usuarios y grupos no pueden hacer nada.
+
+resultado=""
+tmp=""
+ficheroODirectorio=`ls -ld $1 |cut -c 1`
+
+function transformarRWX {
+  # permi=`echo $1 |cut -d":" -f3`
+  if [ $ficheroODirectorio == "d" ];then
+    ejecutarOEntrar="entrar"
+  else
+    ejecutarOEntrar="ejecutar"
+  fi
+
+  if [ $1 == "rwx" ];then
+    tmp="leer escribir y $ejecutarOEntrar"
+  elif [ $1 == "rw-" ];then
+    tmp="leer y escribir"
+  elif [ $1 == "r-x" ];then
+    tmp="leer y $ejecutarOEntrar"
+  elif [ $1 == "r--" ];then
+    tmp="leer"
+  elif [ $1 == "-wx" ];then
+    tmp="escribir y $ejecutarOEntrar"
+  elif [ $1 == "--x" ];then
+    tmp="$ejecutarOEntrar"
+  elif [ $1 == "-w-" ];then
+    tmp="escribir"
+  else
+    tmp="error"
+  fi
+}
+
+function imprimirNombreUsuario {
+  if [ $2 == "usuario" ];then
+    tipo="Usuario"
+  else
+    tipo="Grupo"
+  fi
+  transformarRWX `echo $1 |cut -d":" -f3`
+  resultado=$resultado"$tipo "`echo $1 | cut -d":" -f2`':'$tmp'\n'
+
+}
+
+function imprimirDatosUsuario {
+  imprimirNombreUsuario $1 $2
+}
+
+propietario=`getfacl $1| head -n2 |tail -n1 |cut -d":" -f2| tr -d " "`
+grupo=`getfacl $1| grep '# group: ' | cut -d":" -f2 |tr -d " "`
+
+permisosPropietario=`getfacl $1|grep user:: | cut -d":" -f3`
+permisosGrupo=`getfacl $1|grep group:: | cut -d":" -f3`
+permisosOtros=`getfacl $1|grep other::|cut -d":" -f3`
+
+usuariosAparte=(`getfacl $1|grep user:[^:]`)
+
+let contador=${#usuariosAparte[@]}-1
+
+for indice in `seq 0 $contador`
+do
+  imprimirDatosUsuario ${usuariosAparte[$indice]} usuario
+done
+
+gruposAparte=(`getfacl $1|grep group:[^\ :]`)
+
+let contador=${#gruposAparte[@]}-1
+
+for indice in `seq 0 $contador`
+do
+  imprimirDatosUsuario ${gruposAparte[$indice]} grupo
+done
+
+echo "Los permisos del fichero XXX son: "
+echo ""
+
+transformarRWX $permisosPropietario
+echo "El propietario del archivo es $propietario y tiene los permisos $tmp"
+transformarRWX $permisosGrupo
+echo "El grupo del archivo es $grupo y tiene los permisos $tmp"
+echo ""
+echo -e $resultado
 ```
