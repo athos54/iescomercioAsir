@@ -686,3 +686,109 @@ echo "El grupo del archivo es $grupo y tiene los permisos $tmp"
 echo ""
 echo -e $resultado
 ```
+
+ejercicio permisos2.sh
+```bash
+#!/bin/bash
+
+#Programa llamado permisos.sh que realice lo siguiente:
+#Al llamarlo se le pasará como parámetro el nombre de un usuario. OK
+#Si el usuario no existe en el sistema lo debe de indicar y finalizar OK
+#pero si existe solicitará por pantalla la ruta a un fichero o directorio. OK
+#Si el fichero o directorio no existe lo indicará por pantalla y finalizará. OK
+
+# Si existe mostrará por pantalla los permisos reales de ese usuario en el fichero o directorio dado.
+#Hay que tener en cuenta a la hora de mostrar los permisos las prioridades de las ACLs así como los grupos a los que pertenece dicho usuario o los permisos de otros.
+
+
+if [ -z $1 ];then
+  echo "Usuario no existe"
+  exit
+fi
+
+read -p "Introduce fichero o directorio: " archivo
+if [ -z $archivo ];then
+  echo "No has introducido nada Marcial!!!"
+  exit
+fi
+
+if [ ! -d $archivo ] && [ ! -e $archivo ];then
+  echo $archivo" no existe"
+  exit
+fi
+
+permisos=`getfacl $archivo |grep user:$1`
+
+#comprobamos usuario inicio
+if [ -z "$permisos" ];then #si no aparece los permisos son de otros
+  otrosFinal="El usuario $1 tiene los permisos "`getfacl $archivo |grep other::|cut -d":" -f3`" (OTROS)"
+else
+  tieneMascara=`echo $permisos |grep effective`
+  if [ -z "$tieneMascara" ];then #NO TIENE MASCARA
+    echo "El usuario $1 tiene los permisos "`echo $permisos |cut -d":" -f3` "(USUARIO AÑADIDO SIN MASCARA)"
+    exit
+  else #SI TIENE MASCARA
+    echo "El usuario $1 tiene los permisos "`echo $permisos |cut -d":" -f4` "(USUARIO AÑADIDO CON MASCARA)"
+    exit
+  fi
+fi
+#comprobamos usuario fin
+gruposDelUsuario=(`groups $1`)
+let ultimoElemento=${#gruposDelUsuario[@]}-1
+for i in `seq 2 $ultimoElemento`
+do
+  grupo=${gruposDelUsuario[$i]}
+  tienePermisosDeGrupo=`getfacl $archivo |grep $grupo`
+  if [ -z $tienePermisosDeGrupo ];then
+    algo=""
+    #echo "El usuario $1 no tiene permisos de grupo ($grupo)"
+  else
+    mascaraDeGrupo=`echo $tienePermisosDeGrupo |grep effective`
+    if [ -z "$mascaraDeGrupo" ]; then
+      permisosGrupoFinal[$i]=`echo $tienePermisosDeGrupo | cut -d":" -f3`
+    else
+      permisosGrupoFinal[$i]=`echo $tienePermisosDeGrupo | cut -d":" -f4`
+
+    fi
+  fi
+done
+r=''
+w=''
+x=''
+if [ ${#permisosGrupoFinal[@]} -gt 0 ];then
+  let cantidadRegistrosArray=${#permisosGrupoFinal[@]}
+  for a in ${permisosGrupoFinal[*]}
+  do
+    lectura=`echo $a | grep 'r'`
+    if [ -z "$lectura" ];then
+      if [ -z $r ];then
+        r='-'
+      fi
+    else
+        r='r'
+    fi
+    escritura=`echo $a | grep 'w'`
+    if [ -z "$escritura" ];then
+      if [ -z $w ];then
+        w='-'
+      fi
+    else
+        w='w'
+    fi
+    ejecucion=`echo $a | grep 'x'`
+    if [ -z "$ejecucion" ];then
+      if [ -z $x ];then
+        x='-'
+      fi
+    else
+        x='x'
+    fi
+    # echo ${permisosGrupoFinal[$a]}
+  done
+  echo "Los permisos de $1 son $r$w$x"
+else
+  echo $otrosFinal
+fi
+#comprobamos grupo inicio
+
+```
