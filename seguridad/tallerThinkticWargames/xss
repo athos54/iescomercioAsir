@@ -1,0 +1,34 @@
+
+http://demo.testfire.net/
+
+<script type="text/javascript">
+  let titulo=document.getElementsByTagName('h1');
+  titulo[0].setAttribute('style','display:none');
+  let titulo2=document.getElementsByTagName('p');
+  titulo2[0].setAttribute('style','display:none');
+
+</script>
+
+<form class="" action="index.html" method="post">
+  <table>
+    <tr>
+      <td>Usuario</td>
+      <td><input type="text" name="usuario" value=""> </td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td><input type="password" name="" value=""> </td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="" value="Acceder"> </td>
+    </tr>
+  </table>
+</form>
+
+software
+vega .> acunetix pero gratis
+tamperdata -> extension navegador
+
+raul tebar
+https://es.linkedin.com/in/rtebar
+r.tebar.a@gmail.com
