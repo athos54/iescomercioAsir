@@ -17,11 +17,7 @@ declare micursor cursor for
 		dbo.categorias.nombre_categoria,
 		compras.productos.preciounidad 
 	from compras.productos inner join dbo.categorias on dbo.categorias.idcategoria=compras.productos.idcategoria
-	group by 
-		dbo.categorias.idcategoria, 
-		dbo.categorias.nombre_categoria,
-		compras.productos.nombreproducto,
-		compras.productos.preciounidad
+	order by 2,1
 
 open micursor
 fetch micursor into @nombreproducto,@nombrecategoria,@preciounidad
@@ -36,11 +32,16 @@ set @contadortotal =0
 while @@FETCH_STATUS=0
 begin
 	print 'Categoria: '+@nombrecategoria
-	print 'Articulo Precio'
+	print space(2)+'Articulo Precio'
 	set @cat=@nombrecategoria
+	set @totalcat =0
+	set @mediacat =0
+	set @contadorcat =0
+
+
 	while @cat=@nombrecategoria and @@FETCH_STATUS=0
 	begin
-		print cast(@nombreproducto as varchar)+' '+cast(@preciounidad as varchar)
+		print  space(4)+cast(@nombreproducto as varchar)+' '+cast(@preciounidad as varchar)
 		set @contadorcat=@contadorcat+1
 		set @contadortotal=@contadortotal+1
 		set @totaltotal=@totaltotal+@preciounidad
@@ -49,7 +50,7 @@ begin
 
 	end
 	set @mediacat=@totalcat/@contadorcat
-	print 'La media de la categoria es: '+cast(@mediacat as varchar)
+	print  space(2)+'La media de la categoria es: '+cast(@mediacat as varchar)
 end
 set @mediatotal=@totaltotal/@contadortotal
 print 'La media total es: '+cast(@mediatotal as varchar)
