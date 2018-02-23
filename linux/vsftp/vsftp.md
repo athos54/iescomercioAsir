@@ -187,7 +187,7 @@ Tenemos permisos de:
 
 * `allow_anon_ssl=yes/no` -> por defecto está a no (lo que no permite acceso por ssl a usuario anonimos)
 
-* `force_anon_ssl=yes/no` -> fuerza que el login del usuario anonimo vaya por ssl
+* `force_anon_logins_ssl=yes/no` -> fuerza que el login del usuario anonimo vaya por ssl
 
 * `force_anon_data_ssl=yes/no` -> fuerza que los datos del usuario anonimo vaya por ssl
 
