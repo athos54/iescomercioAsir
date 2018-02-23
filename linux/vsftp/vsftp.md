@@ -173,7 +173,7 @@ Tenemos permisos de:
 
 * lo primero es crear los certificados con `openssl req -x509 -nodes -newkey rsa:1024 -days 365 -keyout clave.pem -out cert.pem`
 
-* ssl_enable por defecto está a **no**
+* `ssl_enable` por defecto está a **no**
 
 > como hemos usado el algoritmo rsa, tendremos que utilizar las siguientes directivas:
 
