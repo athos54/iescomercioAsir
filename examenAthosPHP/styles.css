@@ -1,0 +1,48 @@
+  .tabla-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    border: 1px solid grey;
+    flex-direction: column;
+  }
+  .tabla{
+    border: 1px solid grey;
+    padding: 2em;
+    border-radius: 5px;
+  }
+  .boton{
+    background-color: rgb(95, 149, 189);
+    border: 1px solid black
+    padding:2em;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+.correcto{
+  color: green;
+  font-size: 1.2em;
+}
+
+.incorrecto{
+  color: red;
+  font-size: 1.2em;
+}
+
+.col{
+  padding: 5px;
+}
+
+.big{
+  font-size: 3rem;
+}
+
+.centrar{
+  text-align: center;
+}
+
+.morado{
+  color: rgb(191, 42, 228);
+}
