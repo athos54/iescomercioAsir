@@ -1,0 +1,4 @@
+C:\xampp\apache\conf
+httpd.conf
+DocumentRoot "f:/santi/httdocs"
+<Directory "f:/santi/httdocs">
